@@ -67,3 +67,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 gem 'dotenv-rails'
+
+gem 'jquery-rails'
+
+gem 'active_model_serializers', '0.10.6'
