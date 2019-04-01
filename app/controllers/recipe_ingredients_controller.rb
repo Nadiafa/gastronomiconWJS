@@ -17,7 +17,7 @@ class RecipeIngredientsController < ApplicationController
   end
 
   def set_ingredient
-    @ingredient = Ingredient.find_or_create_by(name: params[:recipe_ingredient][:ingredient_attributes][:name])
+    @ingredient = Ingredient.find_or_create_by(name: params[:recipe_ingredient][:ingredient_attributes][:name].capitalize)
   end 
   
   private
