@@ -1,11 +1,12 @@
 <h2>Welcome to Gastronomicon</h2>
 <% if !@recipes.empty? %>
+  <h3>Recently Added Recipes:</h3>
   <% @recipes.recent.each do |r| %>
     <% if logged_in? %>
-      <h3><%= link_to r.title, user_recipe_path(r.user, r) %></h3>
+      <h4><%= link_to r.title, user_recipe_path(r.user, r) %></h4>
       <p>by: <%= link_to r.user.username, user_path(r.user) %></p>
     <% else %>
-      <h3><%= r.title %></h3>
+      <h4><%= r.title %></h4>
       <p>by: <%= r.user.username %></p>
     <% end %>
   <% end %>
