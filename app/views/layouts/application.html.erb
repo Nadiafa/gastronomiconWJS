@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  <header style="padding-bottom:30px;">
+  <header>
     <% if logged_in? %>
       <%= link_to "Home", root_path %>
       <%= link_to "View Recipes", recipes_path %>
@@ -22,7 +22,7 @@
       <%= link_to "Log In with Github", '/auth/github' %>
     <% end %>
   </header>
-    <div style="color:red;">
+    <div class="message">
       <%= flash[:message] if flash[:message] %>
     </div>
     <%= yield %>

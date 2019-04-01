@@ -14,10 +14,18 @@
  *= require_self
  */
 
-#error_explanation {
+#error_explanation, .message {
     color: red;
 }
 
 h2 {
     color: olive;
+}
+
+header {
+ padding: 10px 0;
+}
+
+header a {
+    padding-right: 10px;
 }
