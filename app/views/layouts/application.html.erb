@@ -12,7 +12,7 @@
   <header>
     <% if logged_in? %>
       <%= link_to "Home", root_path %>
-      <%= link_to "View Recipes", recipes_path %>
+      <%= link_to "View Recipes", recipes_path, class: "all_recipes" %>
       <%= link_to "My Recipes", user_path(current_user) %> 
       <%= link_to "Create New Recipe", new_user_recipe_path(current_user) %>
       <%= link_to "Log Out", logout_path %>
@@ -22,9 +22,11 @@
       <%= link_to "Log In with Github", '/auth/github' %>
     <% end %>
   </header>
-    <div class="message">
-      <%= flash[:message] if flash[:message] %>
-    </div>
+  <div class="message">
+    <%= flash[:message] if flash[:message] %>
+  </div>
+  <div class="app-container">
     <%= yield %>
+  </div>
   </body>
 </html>
