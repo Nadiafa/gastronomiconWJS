@@ -33,7 +33,7 @@ function Recipe(recipe) {
 
 // Model prototype function to create the html to render with data
 Recipe.prototype.formatIndex = function () {
-  // MAY remove the username and/or description to have it dynamically rendered by clicking the title link
+  // MAY remove the username and/or description to have it dynamically rendered by clicking the title link to go to recipes#show
   let recipeHtml = `
     <a href="/recipes/${this.id}" class="show_link" data-id="${this.id}"><h1>${this.title}</h1></a>
     <p>${this.description}</p>
