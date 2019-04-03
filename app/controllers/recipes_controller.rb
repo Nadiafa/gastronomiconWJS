@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :redirect_if_not_logged_in
+  before_action :set_recipe, only: %i[show previous next]
   
   def index
     @recipes = Recipe.all
@@ -24,7 +25,6 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find_by(id: params[:id])
     respond_to do |f|
       f.html
       f.json { render json: @recipe }
@@ -32,13 +32,11 @@ class RecipesController < ApplicationController
   end
 
   def previous
-    @recipe = Recipe.find_by(id: params[:id])
     @previous_recipe = @recipe.previous
     render json: @previous_recipe
   end
 
   def next
-    @recipe = Recipe.find_by(id: params[:id])
     @next_recipe = @recipe.next
     render json: @next_recipe
   end
@@ -51,5 +49,9 @@ class RecipesController < ApplicationController
 
   def recipe_ingredients_params
     params.require(:recipe).permit(recipe_ingredients_attributes: [:quantity, :ingredient_id, ingredient_attributes: [:name]])
+  end
+
+  def set_recipe
+    @recipe = Recipe.find_by(id: params[:id])
   end
 end
