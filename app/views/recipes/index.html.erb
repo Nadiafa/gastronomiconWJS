@@ -1,4 +1,4 @@
-<h2>All Gastronomicon's Recipes:</h2>
+<h2 class="page_title">All Gastronomicon's Recipes:</h2>
 <% if !@recipes.empty? %>
   <% @recipes.each do |recipe| %>
     <h3><%= link_to recipe.title, user_recipe_path(recipe.user, recipe)  %></h3>

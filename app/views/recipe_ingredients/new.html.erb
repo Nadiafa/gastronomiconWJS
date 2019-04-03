@@ -1,4 +1,4 @@
-<h2>Add a new ingredient for <%= @recipe.title %></h2>
+<h2 class="page_title">Add a new ingredient for <%= @recipe.title %></h2>
 
 <%= form_for @recipe_ingredient do |f| %>
   <%= render partial: 'application/form_for_errors', locals: {obj_to_check: @recipe_ingredient } %>

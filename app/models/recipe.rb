@@ -22,4 +22,14 @@ class Recipe < ApplicationRecord
       end
     end
   end
+
+  def previous
+    recipe = Recipe.where(["id < ?", id]).last
+    recipe ? recipe : Recipe.last
+  end
+
+  def next
+    recipe = Recipe.where(["id > ?", id]).first
+    recipe ? recipe : Recipe.first
+  end 
 end

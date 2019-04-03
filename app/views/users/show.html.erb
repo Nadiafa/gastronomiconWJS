@@ -1,4 +1,4 @@
-<h2><%= @user.username.capitalize %>'s Recipes</h2>
+<h2 class="page_title"><%= @user.username.capitalize %>'s Recipes</h2>
 <% if @user.recipes == [] && @user == current_user %>
   <p>You have not created any recipes yet! Go ahead and <%= link_to "Create your first recipe", new_user_recipe_path(@user) %></p>
 <% elsif @user.recipes == [] && @user != current_user %>

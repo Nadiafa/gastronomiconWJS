@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   
   # users / user/index / user/new
-  resources :users, except: [:index, :new]
+  resources :users, except: [:indexq, :new]
   
   # recipes / recipe/new / recipe/show nested into the current user
   resources :users, only: [] do 
@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
   # recipes / only for index, create and show
   resources :recipes, only: [:index, :create]
+  
+  get '/recipes/:id/next', to: 'recipes#next'
+  get 'recipes/:id/previous', to: 'recipes#previous'
 
   resources :recipes, only: [:show] do
     resources :ingredients, only: [:show]
