@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :recipes, only: [:index, :create]
   
   get '/recipes/:id/next', to: 'recipes#next'
-
+  get 'recipes/:id/previous', to: 'recipes#previous'
 
   resources :recipes, only: [:show] do
     resources :ingredients, only: [:show]
