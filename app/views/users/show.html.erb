@@ -1,3 +1,5 @@
+<h2 style="color:green;">This is rendering the USER SHOW page WITH RAILS</h2>
+
 <h2><%= @user.username.capitalize %>'s Recipes</h2>
 <% if @user.recipes == [] && @user == current_user %>
   <p>You have not created any recipes yet! Go ahead and <%= link_to "Create your first recipe", new_user_recipe_path(@user) %></p>

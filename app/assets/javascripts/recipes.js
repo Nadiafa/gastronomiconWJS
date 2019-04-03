@@ -11,7 +11,9 @@ const clickHandlers = () => {
     fetch(`/recipes.json`)
       .then(res => res.json())
       .then(data => {
-        $('.app_container').html('')
+        // *************TO REMOVE the h2 and leave '' to clear screen
+        $('.app_container').html('<h2 style="color:green;">This is rendering the INDEX page WITH JS</h2>')
+        // $('.app_container').html('')
         data.forEach(recipe => {
           let newRecipe = new Recipe(recipe)
           let recipeHtml = newRecipe.formatIndex()
