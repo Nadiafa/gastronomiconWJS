@@ -19,11 +19,24 @@ const clickHandlers = () => {
         })
       })
   })
-
   // access link for recipe title / Show to be manipulated when clicked
   $(document).on('click', '.show_link', function (e) {
     e.preventDefault()
     fetch(`/recipes/${$(this).attr('data-id')}.json`)
+      .then(res => res.json())
+      .then(data => {
+        let recipeDetails = data
+        $('.app_container').html('')
+        let newRecipe = new Recipe(recipeDetails)
+        let recipeHtml = newRecipe.formatShow()
+        $('.app_container').append(recipeHtml)
+      })
+  })
+
+  // access link for Next button to be manipulated when clicked
+  $(document).on('click', '.next-recipe-button', function () {
+    let id = $(this).attr('data-id')
+    fetch(`recipes/${id}/next`)
       .then(res => res.json())
       .then(data => {
         let recipeDetails = data
@@ -61,6 +74,8 @@ Recipe.prototype.formatShow = function () {
     <h2>${this.title}</h2>
     <p>by: <a href="/users/${this.user.id}">${this.user.username}</a></p>
     <p>${this.description}</p>
+    <button class="next-recipe-button" data-id="${this.id}">Next</button>
   `
   return recipeHtml
 }
+
