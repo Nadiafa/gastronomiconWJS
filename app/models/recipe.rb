@@ -25,20 +25,11 @@ class Recipe < ApplicationRecord
 
   def previous
     recipe = Recipe.where(["id < ?", id]).last
-    if recipe
-      recipe
-    else
-      Recipe.last
-    end
+    recipe ? recipe : Recipe.last
   end
 
   def next
     recipe = Recipe.where(["id > ?", id]).first
-    # ?? recipe ? recipe : Recipe.first
-    if recipe
-      recipe
-    else
-      Recipe.first
-    end
+    recipe ? recipe : Recipe.first
   end 
 end
