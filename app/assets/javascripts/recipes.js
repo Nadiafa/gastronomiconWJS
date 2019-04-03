@@ -46,6 +46,19 @@ const clickHandlers = () => {
         $('.app_container').append(recipeHtml)
       })
   })
+
+  $(document).on('click', '.previous-recipe-button', function () {
+    let id = $(this).attr('data-id')
+    fetch(`recipes/${id}/previous`)
+      .then(res => res.json())
+      .then(data => {
+        let recipeDetails = data
+        $('.app_container').html('')
+        let newRecipe = new Recipe(recipeDetails)
+        let recipeHtml = newRecipe.formatShow()
+        $('.app_container').append(recipeHtml)
+      })
+  })
 }
 
 // define JS MO with constructor
@@ -74,6 +87,7 @@ Recipe.prototype.formatShow = function () {
     <h2>${this.title}</h2>
     <p>by: <a href="/users/${this.user.id}">${this.user.username}</a></p>
     <p>${this.description}</p>
+    <button class="previous-recipe-button" data-id="${this.id}">Previous</button>
     <button class="next-recipe-button" data-id="${this.id}">Next</button>
   `
   return recipeHtml
