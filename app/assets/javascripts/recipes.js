@@ -11,8 +11,8 @@ const clickHandlers = () => {
   previousButton()
 }
 
-  // access link for View Recipes / Index to be manipulated when clicked
-  const indexRecipes = () => {
+// access link for View Recipes / Index to be manipulated when clicked
+const indexRecipes = () => {
   $('.all_recipes').on('click', (e) => {
     e.preventDefault()
     fetch(`/recipes.json`)
@@ -26,7 +26,7 @@ const clickHandlers = () => {
         })
       })
   })
-  }
+}
 
 // access link for recipe title / Show to be manipulated when clicked
 const showRecipe = () => {
@@ -43,6 +43,7 @@ const showRecipe = () => {
       })
   })
 }
+
 // access link for Next button to be manipulated when clicked
 const nextButton = () => {
   $(document).on('click', '.next-recipe-button', function () {
@@ -75,10 +76,6 @@ const previousButton = () => {
   })
 }
 
-
-
-
-
 // define JS MO with constructor
 function Recipe(recipe) {
   this.id           = recipe.id
@@ -91,7 +88,6 @@ function Recipe(recipe) {
 
 // Model prototype function to create the html to render recipes#index with data
 Recipe.prototype.formatIndex = function () {
-  // MAY remove the username and/or description to have it dynamically rendered by clicking the title link to go to recipes#show
   let recipeHtml = `
     <a href="/recipes/${this.id}" class="show_link" data-id="${this.id}"><h2>${this.title}</h2></a>
   `
