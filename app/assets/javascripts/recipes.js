@@ -28,11 +28,9 @@ const clickHandlers = () => {
       .then(data => {
         let recipeDetails = data
         $('.app_container').html('')
-       
         let newRecipe = new Recipe(recipeDetails)
         let recipeHtml = newRecipe.formatShow()
         $('.app_container').append(recipeHtml)
-        
       })
   })
 }
@@ -52,8 +50,6 @@ Recipe.prototype.formatIndex = function () {
   // MAY remove the username and/or description to have it dynamically rendered by clicking the title link to go to recipes#show
   let recipeHtml = `
     <a href="/recipes/${this.id}" class="show_link" data-id="${this.id}"><h2>${this.title}</h2></a>
-    <p>${this.description}</p>
-    <p>by: <a href="/users/${this.user.id}">${this.user.username}</a></p>
   `
   return recipeHtml
 }
@@ -65,7 +61,6 @@ Recipe.prototype.formatShow = function () {
     <h2>${this.title}</h2>
     <p>by: <a href="/users/${this.user.id}">${this.user.username}</a></p>
     <p>${this.description}</p>
-
   `
   return recipeHtml
 }
