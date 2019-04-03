@@ -31,6 +31,12 @@ class RecipesController < ApplicationController
     end
   end
 
+  def previous
+    @recipe = Recipe.find_by(id: params[:id])
+    @previous_recipe = @recipe.previous
+    render json: @previous_recipe
+  end
+
   def next
     @recipe = Recipe.find_by(id: params[:id])
     @next_recipe = @recipe.next
