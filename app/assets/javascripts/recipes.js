@@ -5,7 +5,14 @@ $(() => {
 
 // define event handling function/s
 const clickHandlers = () => {
+  indexRecipes()
+  showRecipe()
+  nextButton()
+  previousButton()
+}
+
   // access link for View Recipes / Index to be manipulated when clicked
+  const indexRecipes = () => {
   $('.all_recipes').on('click', (e) => {
     e.preventDefault()
     fetch(`/recipes.json`)
@@ -19,7 +26,10 @@ const clickHandlers = () => {
         })
       })
   })
-  // access link for recipe title / Show to be manipulated when clicked
+  }
+
+// access link for recipe title / Show to be manipulated when clicked
+const showRecipe = () => {
   $(document).on('click', '.show_link', function (e) {
     e.preventDefault()
     fetch(`/recipes/${$(this).attr('data-id')}.json`)
@@ -32,8 +42,9 @@ const clickHandlers = () => {
         $('.app_container').append(recipeHtml)
       })
   })
-
-  // access link for Next button to be manipulated when clicked
+}
+// access link for Next button to be manipulated when clicked
+const nextButton = () => {
   $(document).on('click', '.next-recipe-button', function () {
     let id = $(this).attr('data-id')
     fetch(`recipes/${id}/next`)
@@ -46,20 +57,27 @@ const clickHandlers = () => {
         $('.app_container').append(recipeHtml)
       })
   })
+}
 
+// access link for Previous button to be manipulated when clicked
+const previousButton = () => {
   $(document).on('click', '.previous-recipe-button', function () {
-    let id = $(this).attr('data-id')
-    fetch(`recipes/${id}/previous`)
-      .then(res => res.json())
-      .then(data => {
-        let recipeDetails = data
-        $('.app_container').html('')
-        let newRecipe = new Recipe(recipeDetails)
-        let recipeHtml = newRecipe.formatShow()
-        $('.app_container').append(recipeHtml)
-      })
+  let id = $(this).attr('data-id')
+  fetch(`recipes/${id}/previous`)
+    .then(res => res.json())
+    .then(data => {
+      let recipeDetails = data
+      $('.app_container').html('')
+      let newRecipe = new Recipe(recipeDetails)
+      let recipeHtml = newRecipe.formatShow()
+      $('.app_container').append(recipeHtml)
+    })
   })
 }
+
+
+
+
 
 // define JS MO with constructor
 function Recipe(recipe) {
