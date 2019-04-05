@@ -16,6 +16,8 @@ const clickHandlers = () => {
 const indexRecipes = () => {
   $('.all_recipes').on('click', (e) => {
     e.preventDefault()
+    // temp URL slug to see I'm rendering via this function
+    history.pushState(null, null, 'jsRenderedIndex')
     fetch(`/recipes.json`)
       .then(res => res.json())
       .then(data => {
@@ -33,6 +35,8 @@ const indexRecipes = () => {
 const showRecipe = () => {
   $(document).on('click', '.show_link', function (e) {
     e.preventDefault()
+    // temp URL slug to see I'm rendering via this function
+    history.pushState(null, null, 'jsRenderedShow')
     fetch(`/recipes/${$(this).attr('data-id')}.json`)
       .then(res => res.json())
       .then(data => {
@@ -81,6 +85,8 @@ const previousButton = () => {
 const submitNewRecipeForm = () => {
   $('#new-recipe-form').on('submit', function (e) {
     e.preventDefault()
+    // temp URL slug to see I'm rendering via this function
+    history.pushState(null, null, 'jsRenderedShowFromNewRecipeForm')
     let values = $(this).serialize()
     $.post('/recipes', values) 
       .done(function(data) {
