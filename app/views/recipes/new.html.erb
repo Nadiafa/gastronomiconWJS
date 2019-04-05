@@ -1,5 +1,5 @@
 <h2 class="page_title">Create a new recipe</h2>
-<%= form_for @recipe do |f| %>
+<%= form_for @recipe, html: { id: "new-recipe-form"} do |f| %>
   <%= render partial: 'application/form_for_errors', locals: {obj_to_check: @recipe } %>
   <div>
     <%= f.label :title %><br>

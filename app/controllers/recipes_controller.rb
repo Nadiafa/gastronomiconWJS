@@ -18,7 +18,8 @@ class RecipesController < ApplicationController
     @recipe = current_user.recipes.new(recipe_params)
     if @recipe.save
       @recipe.add_ingredients_to_recipe(recipe_ingredients_params)
-      redirect_to user_recipe_path(current_user, @recipe)
+      # redirect_to user_recipe_path(current_user, @recipe)
+      render json: @recipe
     else
       render :new 
     end

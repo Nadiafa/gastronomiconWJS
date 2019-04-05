@@ -9,12 +9,15 @@ const clickHandlers = () => {
   showRecipe()
   nextButton()
   previousButton()
+  submitNewRecipeForm()
 }
 
 // access link for View Recipes / Index to be manipulated when clicked
 const indexRecipes = () => {
   $('.all_recipes').on('click', (e) => {
     e.preventDefault()
+    // temp URL slug to see I'm rendering via this function
+    history.pushState(null, null, 'jsRenderedIndex')
     fetch(`/recipes.json`)
       .then(res => res.json())
       .then(data => {
@@ -32,6 +35,8 @@ const indexRecipes = () => {
 const showRecipe = () => {
   $(document).on('click', '.show_link', function (e) {
     e.preventDefault()
+    // temp URL slug to see I'm rendering via this function
+    history.pushState(null, null, 'jsRenderedShow')
     fetch(`/recipes/${$(this).attr('data-id')}.json`)
       .then(res => res.json())
       .then(data => {
@@ -76,6 +81,23 @@ const previousButton = () => {
   })
 }
 
+// access link for Submit New Recipe button in recipes#new form to be manipulated when clicked/submitted
+const submitNewRecipeForm = () => {
+  $('#new-recipe-form').on('submit', function (e) {
+    e.preventDefault()
+    // temp URL slug to see I'm rendering via this function
+    history.pushState(null, null, 'jsRenderedShowFromNewRecipeForm')
+    let values = $(this).serialize()
+    $.post('/recipes', values) 
+      .done(function(data) {
+        $('.app_container').html('')
+        let newRecipe = new Recipe(data)
+        let recipeHtml = newRecipe.formatShow()
+        $('.app_container').html(recipeHtml)
+      });
+  });
+}
+
 // define JS MO with constructor
 function Recipe(recipe) {
   this.id           = recipe.id
@@ -96,11 +118,21 @@ Recipe.prototype.formatIndex = function () {
 
 // Model prototype function to create the html to render recipes#show with data
 Recipe.prototype.formatShow = function () {
-    // will insert ingredients below description
+  let recipeInstance = this
+  // ?insert ingredients below description?
+  let ingredientsDetails = recipeInstance.ingredients.map(function(ingredient) {
+    // let ingredientName = ingredient.name
+    return (`
+        <li>${ingredient.name}</li>
+      `)
+  }).join('')
+
   let recipeHtml = `
     <h2>${this.title}</h2>
     <p>by: <a href="/users/${this.user.id}">${this.user.username}</a></p>
     <p>${this.description}</p>
+    <p>Ingredients:</p>
+    <ul>${ingredientsDetails}</ul>
     <button class="previous-recipe-button" data-id="${this.id}">Previous</button>
     <button class="next-recipe-button" data-id="${this.id}">Next</button>
   `
