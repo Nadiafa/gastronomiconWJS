@@ -118,11 +118,21 @@ Recipe.prototype.formatIndex = function () {
 
 // Model prototype function to create the html to render recipes#show with data
 Recipe.prototype.formatShow = function () {
-    // will insert ingredients below description
+  let recipeInstance = this
+  // ?insert ingredients below description?
+  let ingredientsDetails = recipeInstance.ingredients.map(function(ingredient) {
+    // let ingredientName = ingredient.name
+    return (`
+        <li>${ingredient.name}</li>
+      `)
+  }).join('')
+
   let recipeHtml = `
     <h2>${this.title}</h2>
     <p>by: <a href="/users/${this.user.id}">${this.user.username}</a></p>
     <p>${this.description}</p>
+    <p>Ingredients:</p>
+    <ul>${ingredientsDetails}</ul>
     <button class="previous-recipe-button" data-id="${this.id}">Previous</button>
     <button class="next-recipe-button" data-id="${this.id}">Next</button>
   `
