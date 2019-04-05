@@ -9,6 +9,7 @@ const clickHandlers = () => {
   showRecipe()
   nextButton()
   previousButton()
+  submitNewRecipeForm()
 }
 
 // access link for View Recipes / Index to be manipulated when clicked
@@ -74,6 +75,21 @@ const previousButton = () => {
       $('.app_container').append(recipeHtml)
     })
   })
+}
+
+// access link for Submit New Recipe button in recipes#new form to be manipulated when clicked/submitted
+const submitNewRecipeForm = () => {
+  $('#new-recipe-form').on('submit', function (e) {
+    e.preventDefault()
+    let values = $(this).serialize()
+    $.post('/recipes', values) 
+      .done(function(data) {
+        $('.app_container').html('')
+        let newRecipe = new Recipe(data)
+        let recipeHtml = newRecipe.formatShow()
+        $('.app_container').html(recipeHtml)
+      });
+  });
 }
 
 // define JS MO with constructor
