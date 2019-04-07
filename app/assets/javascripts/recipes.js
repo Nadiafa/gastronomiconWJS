@@ -14,18 +14,18 @@ const clickHandlers = () => {
 
 // access link for View Recipes / Index to be manipulated when clicked
 const indexRecipes = () => {
-  $('.all_recipes').on('click', (e) => {
+  $('#all-recipes').on('click', (e) => {
     e.preventDefault()
     // temp URL slug to see I'm rendering via this function
     history.pushState(null, null, 'jsRenderedIndex')
     fetch(`/recipes.json`)
       .then(res => res.json())
       .then(data => {
-        $('.app_container').html('')
+        $('#app-container').html('')
         data.forEach(recipe => {
           let newRecipe = new Recipe(recipe)
           let recipeHtml = newRecipe.formatIndex()
-          $('.app_container').append(recipeHtml)
+          $('#app-container').append(recipeHtml)
         })
       })
   })
@@ -33,7 +33,7 @@ const indexRecipes = () => {
 
 // access link for recipe title / Show to be manipulated when clicked
 const showRecipe = () => {
-  $(document).on('click', '.show_link', function (e) {
+  $(document).on('click', '.show-link', function (e) {
     e.preventDefault()
     // temp URL slug to see I'm rendering via this function
     history.pushState(null, null, 'jsRenderedShow')
@@ -41,10 +41,10 @@ const showRecipe = () => {
       .then(res => res.json())
       .then(data => {
         let recipeDetails = data
-        $('.app_container').html('')
+        $('#app-container').html('')
         let newRecipe = new Recipe(recipeDetails)
         let recipeHtml = newRecipe.formatShow()
-        $('.app_container').append(recipeHtml)
+        $('#app-container').append(recipeHtml)
       })
   })
 }
@@ -57,10 +57,10 @@ const nextButton = () => {
       .then(res => res.json())
       .then(data => {
         let recipeDetails = data
-        $('.app_container').html('')
+        $('#app-container').html('')
         let newRecipe = new Recipe(recipeDetails)
         let recipeHtml = newRecipe.formatShow()
-        $('.app_container').append(recipeHtml)
+        $('#app-container').append(recipeHtml)
       })
   })
 }
@@ -73,10 +73,10 @@ const previousButton = () => {
     .then(res => res.json())
     .then(data => {
       let recipeDetails = data
-      $('.app_container').html('')
+      $('#app-container').html('')
       let newRecipe = new Recipe(recipeDetails)
       let recipeHtml = newRecipe.formatShow()
-      $('.app_container').append(recipeHtml)
+      $('.#pp_-ontainer').append(recipeHtml)
     })
   })
 }
@@ -90,10 +90,10 @@ const submitNewRecipeForm = () => {
     let values = $(this).serialize()
     $.post('/recipes', values) 
       .done(function(data) {
-        $('.app_container').html('')
+        $('#app-container').html('')
         let newRecipe = new Recipe(data)
         let recipeHtml = newRecipe.formatShow()
-        $('.app_container').html(recipeHtml)
+        $('#app-container').html(recipeHtml)
       });
   });
 }
@@ -111,7 +111,7 @@ function Recipe(recipe) {
 // Model prototype function to create the html to render recipes#index with data
 Recipe.prototype.formatIndex = function () {
   let recipeHtml = `
-    <a href="/recipes/${this.id}" class="show_link" data-id="${this.id}"><h2>${this.title}</h2></a>
+    <a href="/recipes/${this.id}" class="show-link" data-id="${this.id}"><h2>${this.title}</h2></a>
   `
   return recipeHtml
 }

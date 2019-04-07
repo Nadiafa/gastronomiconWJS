@@ -12,7 +12,7 @@
   <header>
     <% if logged_in? %>
       <%= link_to "Home", root_path %>
-      <%= link_to "View Recipes", recipes_path, class: "all_recipes" %>
+      <%= link_to "View Recipes", recipes_path, id: "all-recipes" %>
       <%= link_to "My Recipes", user_path(current_user) %> 
       <%= link_to "Create New Recipe", new_user_recipe_path(current_user) %>
       <%= link_to "Log Out", logout_path %>
@@ -25,7 +25,7 @@
   <div class="message">
     <%= flash[:message] if flash[:message] %>
   </div>
-  <div class="app_container">
+  <div id="app-container">
     <%= yield %>
   </div>
   </body>
