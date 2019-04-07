@@ -3,7 +3,6 @@ $(() => {
   clickHandlers()
 })
 
-// define event handling function/s
 const clickHandlers = () => {
   indexRecipes()
   showRecipe()
@@ -12,12 +11,13 @@ const clickHandlers = () => {
   submitNewRecipeForm()
 }
 
-// access link for View Recipes / Index to be manipulated when clicked
+// View Recipes link for Index
 const indexRecipes = () => {
   $('#all-recipes').on('click', (e) => {
     e.preventDefault()
     // temp URL slug to see I'm rendering via this function
     history.pushState(null, null, 'jsRenderedIndex')
+    // history.pushState(null, null, 'all-recipes')
     fetch(`/recipes.json`)
       .then(res => res.json())
       .then(data => {
@@ -31,13 +31,15 @@ const indexRecipes = () => {
   })
 }
 
-// access link for recipe title / Show to be manipulated when clicked
+// recipe title link for Show
 const showRecipe = () => {
   $(document).on('click', '.show-link', function (e) {
     e.preventDefault()
+    let id = $(this).attr('data-id')
     // temp URL slug to see I'm rendering via this function
     history.pushState(null, null, 'jsRenderedShow')
-    fetch(`/recipes/${$(this).attr('data-id')}.json`)
+    // history.pushState(null, null, `recipe-${id}`)
+    fetch(`/recipes/${id}.json`)
       .then(res => res.json())
       .then(data => {
         let recipeDetails = data
@@ -49,7 +51,7 @@ const showRecipe = () => {
   })
 }
 
-// access link for Next button to be manipulated when clicked
+// Next button
 const nextButton = () => {
   $(document).on('click', '.next-recipe-button', function () {
     let id = $(this).attr('data-id')
@@ -65,7 +67,7 @@ const nextButton = () => {
   })
 }
 
-// access link for Previous button to be manipulated when clicked
+// Previous button
 const previousButton = () => {
   $(document).on('click', '.previous-recipe-button', function () {
   let id = $(this).attr('data-id')
@@ -76,17 +78,18 @@ const previousButton = () => {
       $('#app-container').html('')
       let newRecipe = new Recipe(recipeDetails)
       let recipeHtml = newRecipe.formatShow()
-      $('.#pp_-ontainer').append(recipeHtml)
+      $('#app-container').append(recipeHtml)
     })
   })
 }
 
-// access link for Submit New Recipe button in recipes#new form to be manipulated when clicked/submitted
+// Cretate Recipe button in recipes#new form dynamic resource submission
 const submitNewRecipeForm = () => {
   $('#new-recipe-form').on('submit', function (e) {
     e.preventDefault()
     // temp URL slug to see I'm rendering via this function
     history.pushState(null, null, 'jsRenderedShowFromNewRecipeForm')
+    // history.pushState(null, null, `${this.id}`)
     let values = $(this).serialize()
     $.post('/recipes', values) 
       .done(function(data) {
@@ -98,7 +101,7 @@ const submitNewRecipeForm = () => {
   });
 }
 
-// define JS MO with constructor
+// JS MO constructor
 function Recipe(recipe) {
   this.id           = recipe.id
   this.title        = recipe.title
@@ -108,7 +111,7 @@ function Recipe(recipe) {
   this.recipe_ingredients = recipe.recipe_ingredients
 }
 
-// Model prototype function to create the html to render recipes#index with data
+// html for recipes#index
 Recipe.prototype.formatIndex = function () {
   let recipeHtml = `
     <a href="/recipes/${this.id}" class="show-link" data-id="${this.id}"><h2>${this.title}</h2></a>
@@ -116,12 +119,10 @@ Recipe.prototype.formatIndex = function () {
   return recipeHtml
 }
 
-// Model prototype function to create the html to render recipes#show with data
+// html for recipes#show
 Recipe.prototype.formatShow = function () {
   let recipeInstance = this
-  // ?insert ingredients below description?
   let ingredientsDetails = recipeInstance.ingredients.map(function(ingredient) {
-    // let ingredientName = ingredient.name
     return (`
         <li>${ingredient.name}</li>
       `)
