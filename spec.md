@@ -1,6 +1,6 @@
 # Specifications for the Rails with jQuery Assessment
 
-Specs:
+## Specs:
 - [X] Use jQuery for implementing new requirements
 - [X] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
 - [X] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
@@ -9,7 +9,7 @@ Specs:
 - [X] Translate JSON responses into js model objects.
 - [X] At least one of the js model objects must have at least one method added by your code to the prototype.
 
-Confirm
+## Confirm
 - [X] You have a large number of small Git commits
 - [X] Your commit messages are meaningful
 - [X] You made the changes in a commit that relate to the commit message
