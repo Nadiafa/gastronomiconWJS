@@ -12,7 +12,7 @@ This application uses Ruby version 2.3.3
 ### Installation
 
 Clone from Github:
-* `$ git clone git@github.com:Nadiafa/gastronomicon.git`
+* `$ git clone git@github.com:Nadiafa/gastronomiconWJS.git`
 Execute:
 * Run `bundle install`
 * Run `rails server`
@@ -21,7 +21,7 @@ Execute:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Nadiafa/gastronomicon. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Nadiafa/gastronomiconWJS. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -29,4 +29,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the MuseumExhibitions project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Nadiafa/gastronomicon/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the MuseumExhibitions project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Nadiafa/gastronomiconWJS/blob/master/CODE_OF_CONDUCT.md).
