@@ -5,6 +5,7 @@ $(() => {
 
 const clickHandlers = () => {
   indexRecipes()
+  indexSortedRecipes()
   showRecipe()
   nextButton()
   previousButton()
@@ -31,6 +32,40 @@ const indexRecipes = () => {
   })
 }
 
+// View Sorted Recipes link for Index
+const indexSortedRecipes = () => {
+  $('#sorted-recipes').on('click', (e) => {
+    e.preventDefault()
+    // temp URL slug to see I'm rendering via this function
+    history.pushState(null, null, 'jsRenderedSortedIndex')
+    // history.pushState(null, null, 'sorted-recipes')
+    fetch(`/recipes.json`)
+      .then(res => res.json())
+      .then(data => {
+        alphabSortRecipes(data)
+        $('#app-container').html('')
+        data.forEach(recipe => {
+          let newRecipe = new Recipe(recipe)
+          let recipeHtml = newRecipe.formatIndex()
+          $('#app-container').append(recipeHtml)
+        })
+      })
+  })
+}
+
+const alphabSortRecipes = function(data) {
+  data.sort(function(a, b) {
+    const nameA = a.title.toUpperCase();
+    const nameB = b.title.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+}
 // recipe title link for Show
 const showRecipe = () => {
   $(document).on('click', '.show-link', function (e) {
@@ -118,6 +153,7 @@ Recipe.prototype.formatIndex = function () {
   `
   return recipeHtml
 }
+
 
 // html for recipes#show
 Recipe.prototype.formatShow = function () {
