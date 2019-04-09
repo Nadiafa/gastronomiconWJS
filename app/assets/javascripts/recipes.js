@@ -16,9 +16,7 @@ const clickHandlers = () => {
 const indexRecipes = () => {
   $('#all-recipes').on('click', (e) => {
     e.preventDefault()
-    // temp URL slug to see I'm rendering via this function
-    history.pushState(null, null, 'jsRenderedIndex')
-    // history.pushState(null, null, 'all-recipes')
+    history.pushState(null, null, 'all-recipes')
     fetch(`/recipes.json`)
       .then(res => res.json())
       .then(data => {
@@ -36,9 +34,7 @@ const indexRecipes = () => {
 const indexSortedRecipes = () => {
   $('#sorted-recipes').on('click', (e) => {
     e.preventDefault()
-    // temp URL slug to see I'm rendering via this function
-    history.pushState(null, null, 'jsRenderedSortedIndex')
-    // history.pushState(null, null, 'sorted-recipes')
+    history.pushState(null, null, 'all-recipes-alphabetically')
     fetch(`/recipes.json`)
       .then(res => res.json())
       .then(data => {
@@ -71,9 +67,7 @@ const showRecipe = () => {
   $(document).on('click', '.show-link', function (e) {
     e.preventDefault()
     let id = $(this).attr('data-id')
-    // temp URL slug to see I'm rendering via this function
-    history.pushState(null, null, 'jsRenderedShow')
-    // history.pushState(null, null, `recipe-${id}`)
+    history.pushState(null, null, `recipe-${id}`)
     fetch(`/recipes/${id}.json`)
       .then(res => res.json())
       .then(data => {
@@ -118,13 +112,11 @@ const previousButton = () => {
   })
 }
 
-// Cretate Recipe button in recipes#new form dynamic resource submission
+// Create Recipe button in recipes#new form dynamic resource submission
 const submitNewRecipeForm = () => {
   $('#new-recipe-form').on('submit', function (e) {
     e.preventDefault()
-    // temp URL slug to see I'm rendering via this function
-    history.pushState(null, null, 'jsRenderedShowFromNewRecipeForm')
-    // history.pushState(null, null, `${this.id}`)
+    history.pushState(null, null, `${this.id}`)
     let values = $(this).serialize()
     $.post('/recipes', values) 
       .done(function(data) {
